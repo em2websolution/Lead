@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "webAppName": {
-            "defaultValue": "[concat('webApp-', uniqueString(resourceGroup().id))]",
+            "defaultValue": "[concat('Lead-', uniqueString(resourceGroup().id))]",
             "minLength": 2,
             "type": "String",
             "metadata": {
@@ -26,60 +26,16 @@
         },
         "language": {
             "defaultValue": ".net",
-            "allowedValues": [
-                ".net",
-                "php",
-                "node",
-                "html"
-            ],
-            "type": "String",
-            "metadata": {
-                "description": "The language stack of the app."
-            }
-        },
-        "helloWorld": {
-            "defaultValue": false,
-            "type": "Bool",
-            "metadata": {
-                "description": "true = deploy a sample Hello World app."
-            }
+            "type": "String"
         },
         "repoUrl": {
-            "defaultValue": "",
-            "type": "String",
-            "metadata": {
-                "description": "Optional Git Repo URL"
-            }
+            "defaultValue": "https://github.com/em2websolution/Lead",
+            "type": "String"
         }
     },
     "variables": {
         "appServicePlanPortalName": "[concat('AppServicePlan-', parameters('webAppName'))]",
-        "gitRepoReference": {
-            ".net": "https://github.com/Azure-Samples/app-service-web-dotnet-get-started",
-            "node": "https://github.com/Azure-Samples/nodejs-docs-hello-world",
-            "php": "https://github.com/Azure-Samples/php-docs-hello-world",
-            "html": "https://github.com/Azure-Samples/html-docs-hello-world"
-        },
-        "gitRepoUrl": "[if(bool(parameters('helloWorld')), variables('gitRepoReference')[toLower(parameters('language'))], parameters('repoUrl'))]",
-        "configReference": {
-            ".net": {
-                "comments": ".Net app. No additional configuration needed."
-            },
-            "html": {
-                "comments": "HTML app. No additional configuration needed."
-            },
-            "php": {
-                "phpVersion": "7.4"
-            },
-            "node": {
-                "appSettings": [
-                    {
-                        "name": "WEBSITE_NODE_DEFAULT_VERSION",
-                        "value": "12.15.0"
-                    }
-                ]
-            }
-        }
+        "gitRepoUrl": "[parameters('repoUrl')]"
     },
     "resources": [
         {
@@ -100,7 +56,7 @@
                 "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
             ],
             "properties": {
-                "siteConfig": "[variables('configReference')[parameters('language')]]",
+                "siteConfig": "[parameters('language')]",
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanPortalName'))]"
             },
             "resources": [
@@ -126,8 +82,12 @@
 
 /*
     //Criar RG
-    az group create --name LeadResourceGroup --location "Central US"
+    az group create --name LeadRG --location "Central US"
 
     //Implanta o Template
-    az deployment group create --name blanktemplate --resource-group LeadResourceGroup --template-file $templateFile
+    $templateFile = "azuredeploy.json"
+    az deployment group create --name leadApi --resource-group LeadRG --template-file $templateFile
+
+    //Link Git
+    az webapp deployment source config-local-git --name webApp-emtltmrb3hpao --resource-group LeadRG
 */

@@ -4,7 +4,7 @@ on:
     branches:
     - main
 env:
-  AZURE_WEBAPP_NAME: webApp-emtltmrb3hpao
+  AZURE_WEBAPP_NAME: Lead-atbwtmqkwcl6u
   AZURE_WEBAPP_PACKAGE_PATH: Lead.Backend/publish
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_089ABBC30469475EA576B04074B28D35 }}
   CONFIGURATION: Release

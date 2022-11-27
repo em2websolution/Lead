@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core app to Windows WebApp LeadBackend20221126171701
+name: Build and deploy .NET Core app to Windows WebApp Lead-atbwtmqkwcl6u
 on:
   push:
     branches:

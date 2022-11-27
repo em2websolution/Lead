@@ -10,7 +10,7 @@ We are striving to build a world-class application with microservices that expos
     * Company (optional)
     * ZIP Code (optional)
     * Phone Number (mandatory)
-    * Date Created
+    * Date Created 
 
 2. The API allow the user to add a new lead to the dataset.
     * A persistent datastore isn't required. The datastore can instead be memory-based. But, the code should be designed in such a way that a persistent datastore could be substituted later.

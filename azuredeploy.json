@@ -86,7 +86,7 @@
 
     //Implanta o Template
     $templateFile = "azuredeploy.json"
-    az deployment group create --name leadApi --resource-group LeadRG --template-file $templateFile
+    az deployment group create --name leadtemplate --resource-group LeadRG --template-file $templateFile
 
     //Criar profile GitAction via Visual Studio
     //Fazer push pro git

@@ -17,7 +17,7 @@ We are striving to build a world-class application with microservices that expos
 3. The API allow the user to retrieve all people in the dataset.
 
 ## Infraestructure
-![alt text](https://github.com/em2websolution/Lead/leadinfra.png?raw=true)
+![alt text](https://github.com/em2websolution/Lead/blob/main/leadinfra.png?raw=true)
 
 ## Running in Visual Studio
 * Open `Lead.Backend.sln` in Visual Studio.

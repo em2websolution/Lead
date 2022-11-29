@@ -16,6 +16,9 @@ We are striving to build a world-class application with microservices that expos
     * A persistent datastore isn't required. The datastore can instead be memory-based. But, the code should be designed in such a way that a persistent datastore could be substituted later.
 3. The API allow the user to retrieve all people in the dataset.
 
+## Infraestructure
+![alt text](https://github.com/em2websolution/Lead/leadinfra.png?raw=true)
+
 ## Running in Visual Studio
 * Open `Lead.Backend.sln` in Visual Studio.
 * Run the solution.

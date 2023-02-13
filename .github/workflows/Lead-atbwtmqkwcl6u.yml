@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core app to Windows WebApp Lead-atbwtmqkwcl6u
+name: Build and deploy .NET Core app to Windows WebApp Lead-atbwtmqkwcl6u teste
 on:
   push:
     branches:

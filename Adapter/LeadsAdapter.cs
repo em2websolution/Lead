@@ -1,5 +1,6 @@
 ﻿using Domain.Adapters;
 using Domain.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace Adapter
 {
@@ -7,9 +8,15 @@ namespace Adapter
     {
         private readonly List<Leads> _database;
 
-        public LeadsAdapter()
+        private RabbitMqSender _rabbitMqSender;
+
+        private readonly IConfigurationSection _rabbitMqConfig;
+
+        public LeadsAdapter(IConfiguration configuration)
         {
             _database = new List<Leads>();
+            _rabbitMqConfig = configuration.GetSection("RabbitMq");
+            _rabbitMqSender = new RabbitMqSender(_rabbitMqConfig["HostName"]);
         }
         public Leads GetById(Guid id)
         {
@@ -39,6 +46,9 @@ namespace Adapter
         public Guid Insert(Leads leads)
         {
             _database.Add(leads);
+
+            var rabbitMqMessage = new RabbitMqMessage(leads.ToString(), RabbitMqQueues.ProcessNewLead);
+            _rabbitMqSender.SendMessage(rabbitMqMessage);
 
             return leads.Id;
         }

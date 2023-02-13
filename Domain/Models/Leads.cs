@@ -24,5 +24,10 @@ namespace Domain.Models
         public string ZipCode { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime Created { get; set; }
+
+        public override string ToString()
+        {
+            return $"FirsName: {this.FirsName}, LastName: {this.LastName}, Email: {this.Email}, Company: {this.Company}, ZipCode: {this.ZipCode}, PhoneNumber: {this.PhoneNumber}, Created: {this.Created}";
+        }
     }
 }

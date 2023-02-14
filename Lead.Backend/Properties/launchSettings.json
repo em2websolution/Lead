@@ -33,6 +33,16 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/index.html",
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:44390/index.html",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:44390;http://localhost:60188"
+      },
+      "distributionName": ""
     }
   }
 }

@@ -12,11 +12,19 @@ namespace Adapter
 
         private readonly IConfigurationSection _rabbitMqConfig;
 
+        private string _hostName;
+
         public LeadsAdapter(IConfiguration configuration)
         {
             _database = new List<Leads>();
+
             _rabbitMqConfig = configuration.GetSection("RabbitMq");
-            _rabbitMqSender = new RabbitMqSender(_rabbitMqConfig["HostName"]);
+
+            if (string.IsNullOrEmpty(_rabbitMqConfig["HostName"]))
+                _hostName = Environment.GetEnvironmentVariable("RABBITMQ_HOST");
+            else _hostName = _rabbitMqConfig["HostName"];
+
+            _rabbitMqSender = new RabbitMqSender(_hostName);
         }
         public Leads GetById(Guid id)
         {
@@ -35,6 +43,9 @@ namespace Adapter
 
         public Leads Get(Guid id)
         {
+            var consumer = new RabbitMQConsumer(_hostName, RabbitMqQueues.ProcessNewLead);
+            consumer.Consume();
+
             return GetById(id);
         }
 
